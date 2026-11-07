@@ -1,8 +1,9 @@
 {
-  "apiKey": "AIzaSyA-TU_API_KEY_AQUI",
-  "authDomain": "catalogo-firestore.firebaseapp.com",
-  "projectId": "catalogo-firestore",
-  "storageBucket": "catalogo-firestore.appspot.com",
-  "messagingSenderId": "123456789012",
-  "appId": "1:123456789012:web:abc123def456"
+"apiKey": "AIzaSyCnKKW-TYHmWm4sucvU7PZqQhK_UgVgA1k",
+  "authDomain": "proyectoangular-314b2.firebaseapp.com",
+  "projectId": "proyectoangular-314b2",
+  "storageBucket": "proyectoangular-314b2.firebasestorage.app",
+  "messagingSenderId": "1010589129050",
+  "appId": "1:1010589129050:web:79a72a5e49ef5d68887b63",
+  "measurementId": "G-PC1G9MLR3R"
 }
