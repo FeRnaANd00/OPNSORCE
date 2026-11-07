@@ -1,0 +1,147 @@
+
+<a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+
+<header class="main-header">
+  <nav class="nav-container" aria-label="Navegación principal">
+    <div class="logo">Nexo<span>Catálogo</span></div>
+    <ul class="nav-links">
+      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a href="#gestion">Gestión</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a href="#gestion" class="btn-cta-nav">Empezar ahora</a>
+  </nav>
+</header>
+
+<main id="main-content">
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Gestiona tu inventario con <span class="highlight">precisión digital</span></h1>
+      <p class="hero-subtitle">La plataforma intuitiva para organizar, optimizar y escalar el catálogo de tus productos en tiempo real.</p>
+      <div class="hero-actions">
+        <a href="#gestion" class="btn-primary">Optimizar mi catálogo</a>
+        <a href="#beneficios" class="btn-secondary">Saber más</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="beneficios" class="benefits">
+    <h2 class="section-title">Por qué elegir NexoCatálogo</h2>
+    <div class="benefits-grid">
+      <article class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">⚡</div>
+        <h3>Sincronización Instantánea</h3>
+        <p>Actualizaciones en tiempo real para que tu stock siempre sea exacto en todos tus canales.</p>
+      </article>
+      <article class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">🛡️</div>
+        <h3>Control Total</h3>
+        <p>Gestión centralizada de categorías, precios y existencias con permisos configurables.</p>
+      </article>
+      <article class="benefit-card">
+        <div class="benefit-icon" aria-hidden="true">📈</div>
+        <h3>Escalabilidad Simple</h3>
+        <p>Desde unos pocos artículos hasta miles de productos sin perder rendimiento ni claridad.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- BLOQUE DE GESTIÓN INTEGRADO -->
+  <section id="gestion" class="gestion-container" tabindex="-1">
+    <div class="estado-conexion" role="status" aria-live="polite">
+      {{ mensaje() }}
+    </div>
+
+    <div class="gestion-grid">
+      <section class="panel-form">
+        <h2 class="panel-title">{{ editando() ? 'Editar producto' : 'Registrar producto' }}</h2>
+        <form [formGroup]="form" (ngSubmit)="guardar()" class="producto-form">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" formControlName="nombre" maxlength="100">
+            @if (form.controls.nombre.touched && form.controls.nombre.invalid) { 
+              <small class="error-msg">Entre 3 y 100 caracteres.</small> 
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="precio">Precio (USD)</label>
+            <input id="precio" type="number" formControlName="precio" min="0.01" step="0.01">
+            @if (form.controls.precio.touched && form.controls.precio.invalid) { 
+              <small class="error-msg">Precio mayor que cero.</small> 
+            }
+          </div>
+
+          <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <input id="categoria" formControlName="categoria" maxlength="60">
+            @if (form.controls.categoria.touched && form.controls.categoria.invalid) { 
+              <small class="error-msg">Indica una categoría.</small> 
+            }
+          </div>
+
+          <div class="form-group checkbox">
+            <label>
+              <input type="checkbox" formControlName="disponible"> Disponible
+            </label>
+          </div>
+
+          <div class="acciones-form">
+            <button type="submit" class="btn-primary" [disabled]="ocupado() || !listo()">
+              {{ editando() ? 'Guardar cambios' : 'Crear producto' }}
+            </button>
+            <button type="button" class="btn-secondary" (click)="limpiar()" [disabled]="ocupado()">
+              Cancelar / limpiar
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel-list">
+        <h2 class="panel-title">Mis productos ({{ productos().length }})</h2>
+        <div class="productos-grid">
+          @for (p of productos(); track p.id) {
+            <article class="producto-card">
+              <span class="cat-badge">{{ p.categoria }}</span>
+              <h3>{{ p.nombre }}</h3>
+              <p class="precio">{{ p.precio | currency:'USD' }}</p>
+              <p class="status">{{ p.disponible ? 'Disponible' : 'No disponible' }}</p>
+              <div class="card-actions">
+                <button type="button" class="btn-edit" (click)="editar(p)" [disabled]="ocupado()">Editar</button>
+                <button class="btn-delete" type="button" (click)="eliminar(p)" [disabled]="ocupado()">Eliminar</button>
+              </div>
+            </article>
+          } @empty { 
+            <div class="empty-state">
+              <p>Sin productos. Si la conexión está activa, registra el primero.</p>
+            </div> 
+          }
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+
+<footer id="contacto" class="main-footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="logo">Nexo<span>Catálogo</span></div>
+      <p>Simplificando la gestión de productos.</p>
+    </div>
+    <div class="footer-links">
+      <div class="link-group">
+        <h4>Plataforma</h4>
+        <a href="#">Características</a>
+        <a href="#">Precios</a>
+      </div>
+      <div class="link-group">
+        <h4>Soporte</h4>
+        <a href="#">Ayuda</a>
+        <a href="#">Privacidad</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 NexoCatálogo. Proyecto académico · No registrar datos personales reales.</p>
+  </div>
+</footer>

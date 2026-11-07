@@ -1,0 +1,8 @@
+{
+  "apiKey": "AIzaSyA-TU_API_KEY_AQUI",
+  "authDomain": "catalogo-firestore.firebaseapp.com",
+  "projectId": "catalogo-firestore",
+  "storageBucket": "catalogo-firestore.appspot.com",
+  "messagingSenderId": "123456789012",
+  "appId": "1:123456789012:web:abc123def456"
+}
